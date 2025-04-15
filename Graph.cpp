@@ -9,7 +9,7 @@ using namespace std;
 
 
 // This method is not part of the Graph class / header on purpose
-const GraphEdge* findExistingEdge(nodekey_t gnFrom, nodekey_t gnTo, vector<vector<GraphEdge *>> adjList)
+const GraphEdge* findExistingEdge(nodekey_t gnFrom, nodekey_t gnTo, vector<vector<GraphEdge *> > adjList)
 {
 	if(adjList.size() == 0)
 	{
@@ -51,14 +51,17 @@ void Graph::AddNode(nodekey_t key)
 
 	if(this->IsPresent(key))
 	{
+		cout << "FOUND DUPLICATE" << endl;
 		throw invalid_argument("Duplicate node cannot be added: " + to_string(key));
 	}
 
-
 	nodes.push_back(key);
-	vector <GraphEdge*> *newRow = new vector<GraphEdge*>;
+
+	vector<GraphEdge*> *newRow = new vector<GraphEdge*>;
 	adjList.push_back(*newRow);
 	delete newRow; // ?
+	
+	//cout << "Nodes after add: " << NodesToString() << endl;
 }
 
 
@@ -87,6 +90,10 @@ const GraphEdge *Graph::AddEdge(nodekey_t gnFrom, nodekey_t gnTo, unsigned int w
 
 	GraphEdge *ge = new GraphEdge;
 
+	ge->from = gnFrom;
+	ge->to = gnTo;
+	ge->weight = w;
+
 	//find index for gnFrom
 	size_t fromIdx = 0;
 	while (fromIdx < nodes.size() && nodes[fromIdx] != gnFrom){
@@ -102,8 +109,9 @@ const GraphEdge *Graph::AddEdge(nodekey_t gnFrom, nodekey_t gnTo, unsigned int w
 
 bool Graph::IsPresent(nodekey_t key) const
 {
-	for (nodekey_t i = 0; i < nodes.size(); i++){
-		if (i == key){
+	for (size_t i = 0; i < nodes.size(); i++){
+		if (nodes.at(i) == key){
+			cout << "yes" << endl;
 			return true;
 		}
 	}

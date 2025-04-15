@@ -14,7 +14,7 @@ void TestAddNode(){
 
 
 	g.AddNode(15);
-	//cout << "nodes: " << g.NodesToString() << endl;
+	// cout << "nodes: " << g.NodesToString() << endl;
 	assert(g.NodesToString() == "[(15)]");
 
 
@@ -48,7 +48,7 @@ void TestAddEdge(){
 	
 	const GraphEdge *ge1 = g.AddEdge(15, 9, 2);
 	assert(g.NodesToString() == "[(15), (12), (9)]");
-	//cout << "edges:" <<  g.EdgesToString() << endl;
+	cout << "edges:" <<  g.EdgesToString() << endl;
 	assert(g.EdgesToString() == "[((15)->(9) w:2)]");
 	assert(ge1->from == 15);
 	assert(ge1->to == 9);
