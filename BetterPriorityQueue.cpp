@@ -25,8 +25,14 @@ bool BetterPriorityQueue::Update(const BPQNode& node){
 }
 
 string BetterPriorityQueue::ToString() const {
+
     vector<BPQNode> temp = this->c;
-    sort(temp.begin(), temp.end(), this->comp);
+
+    sort(temp.begin(), temp.end(), [](const BPQNode& a, const BPQNode& b) {
+        if (a.pri == b.pri) return a.gnode < b.gnode;
+        return a.pri < b.pri;
+    });
+    
     stringstream ss;
     ss << "[";
     for (size_t i = 0; i < temp.size(); ++i) {
