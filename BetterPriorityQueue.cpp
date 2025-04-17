@@ -32,7 +32,7 @@ string BetterPriorityQueue::ToString() const {
         if (a.pri == b.pri) return a.gnode < b.gnode;
         return a.pri < b.pri;
     });
-    
+
     stringstream ss;
     ss << "[";
     for (size_t i = 0; i < temp.size(); ++i) {

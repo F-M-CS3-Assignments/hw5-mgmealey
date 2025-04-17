@@ -13,16 +13,18 @@ using namespace std;
 #define INVALID_NODE_KEY ULLONG_MAX
 
 struct BPQNode {
-    nodekey_t gnode = INVALID_NODE_KEY;  // Node key, used for identifying a vertex
-    int pri = INT_MAX;                   // Priority value (smaller = higher priority in queue)
+    nodekey_t gnode = INVALID_NODE_KEY; // Node key, used for identifying a vertex
+    nodekey_t pri = INT_MAX;// Priority value (smaller = higher priority in queue)
+
+    BPQNode() = default;
+    BPQNode(nodekey_t n, int p) : gnode(n), pri(p) {}
 
     // For min-heap: node with lower 'pri' should come first
     bool operator>(const BPQNode& other) const {
         return this->pri > other.pri;
     }
-
-    // Equality is determined by node key only (not priority)
-    bool operator==(const BPQNode& other) const {
+    
+    bool operator==(const BPQNode& other) const{
         return this->gnode == other.gnode;
     }
 };
